@@ -7,6 +7,7 @@
 // 所以返回 [0, 1]
 
 /**
+ * 双层循环
  * @param {number[]} nums
  * @param {number} target
  * @return {number[]}
@@ -29,6 +30,12 @@ var twoSum = function (nums, target) {
     return arr;
 };
 
+/**
+ * 使用对象索引
+ * @param {number[]} nums
+ * @param {number} target
+ * @return {number[]}
+ */
 var twoSumSecond = function (nums, target) {
     let mapObj = {};
     let res = [];
@@ -45,5 +52,29 @@ var twoSumSecond = function (nums, target) {
 }
 
 
-//console.log(twoSum([2,711,15], 9));
-console.log(twoSumSecond([2, 711, 15], 9));
+/**
+ * 使用map 速度最快
+ * @param {number[]} nums
+ * @param {number} target
+ * @return {number[]}
+ */
+const twoSumThird = (nums, target) => {
+    let map = new Map();
+    // nums.forEach((e, i) => map.set(e, i)); 不要先赋值，赋值的话就全部都要循环一遍
+    // console.log(map);
+    // let len = nums.length;
+    for (let i = 0; i < nums.length; i++) {
+        let k = target - nums[i];
+        // console.log(map.has(k));
+        if (map.has(k)) {
+            return [i, map.get(k)];
+        }
+        map.set(nums[i], i);
+    }
+    return [];
+}
+
+
+//console.log(twoSum([2,7,11,15], 9));
+// console.log(twoSumSecond([2, 7, 11, 15], 9));
+console.log(twoSumThird([2, 8, 7, 11, 15], 9));
